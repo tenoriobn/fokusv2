@@ -1,4 +1,5 @@
 import { Image, StyleSheet, Text, View } from "react-native";
+import { router } from "expo-router";
 import { FokusButton } from "../components/FokusButton";
 
 export default function Index() {
@@ -16,7 +17,7 @@ export default function Index() {
         />
         <FokusButton
           title="Quero iniciar!"
-          onPress={() => console.log("navegar")}
+          onPress={() => router.navigate("/pomodoro")}
         />
       </View>
       <View style={styles.footer}>
