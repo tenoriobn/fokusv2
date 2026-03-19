@@ -1,9 +1,13 @@
-import { Text, View } from "react-native";
+import { Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import TaskItem from "../../components/TaskItem";
 
 export default function Tasks() {
   return (
-    <View>
+    <SafeAreaView>
       <Text>Página para listar tarefas</Text>
-    </View>
+      <TaskItem completed={true} text="Estudar React" />
+      <TaskItem text="Estudar React Native" />
+    </SafeAreaView>
   );
 }
