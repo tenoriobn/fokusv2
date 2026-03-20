@@ -7,7 +7,7 @@ import useTaskContent from "../../components/context/useTaskContent";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Tasks() {
-  const { tasks, deleteTask } = useTaskContent();
+  const { tasks, deleteTask, toggleTaskCompleted } = useTaskContent();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -20,6 +20,7 @@ export default function Tasks() {
                 completed={item.completed}
                 text={item.description}
                 onPressDelete={() => deleteTask(item.id)}
+                onToggleComplete={() => toggleTaskCompleted(item.id)}
               />
             )}
             keyExtractor={(item) => item.id}

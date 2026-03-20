@@ -1,20 +1,21 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const TaskContext = createContext();
 
 export function TasksProvider({ children }) {
-  const [tasks, setTasks] = useState([
-    { description: "usuário 1", id: 1 },
-    { description: "usuário 2", id: 2 },
-    { description: "usuário 3", id: 3 },
-    { description: "usuário 4", id: 4 },
-    { description: "usuário 5", id: 5 },
-    { description: "usuário 6", id: 6 },
-    { description: "usuário 7", id: 7 },
-    { description: "usuário 8", id: 8 },
-    { description: "usuário 9", id: 9 },
-    { description: "usuário 10", id: 10 },
-  ]);
+  const [tasks, setTasks] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    console.log("precisamos carregar os dados.");
+  }, []);
+
+  useEffect(() => {
+    if (!isLoaded) {
+      console.log("precisamos persistir");
+      setIsLoaded(true);
+    }
+  }, [tasks]);
 
   const addTask = (description) => {
     console.log("tarefa vai ser adicionada.");
