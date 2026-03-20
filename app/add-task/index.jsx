@@ -1,21 +1,37 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { IconSave } from "../../components/Icons";
 
 export default function AddTask() {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Adicionar uma tarefa</Text>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.inner}>
+          <Text style={styles.text}>Adicionar uma tarefa</Text>
+          <Text style={styles.label}>Em que você está trabalhando?</Text>
+          <TextInput numberOfLines={10} multiline={true} style={styles.input} />
 
-      <View style={styles.inner}>
-        <Text style={styles.label}>Em que você está trabalhando?</Text>
-        <TextInput numberOfLines={10} style={styles.input} />
-        <Pressable style={styles.button}>
-          <IconSave />
-          <Text>Salvar</Text>
-        </Pressable>
-      </View>
-    </SafeAreaView>
+          <View style={styles.actions}>
+            <Pressable style={styles.button}>
+              <IconSave />
+              <Text>Salvar</Text>
+            </Pressable>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -46,11 +62,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 16,
     borderRadius: 8,
+    height: 100,
+    textAlignVertical: "top",
+    textAlign: "left",
   },
   button: {
     flexDirection: "row",
     alignItems: "center",
     gap: 4,
+    justifyContent: "flex-end",
+  },
+  actions: {
+    flexDirection: "row",
     justifyContent: "flex-end",
   },
 });
