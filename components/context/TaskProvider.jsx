@@ -2,11 +2,19 @@ import { createContext, useState } from "react";
 
 export const TaskContext = createContext();
 
-export function TasksProvider(children) {
+export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([]);
-  const addTasks = (description) => {
+
+  const addTask = (description) => {
+    console.log("tarefa vai ser adicionada.");
     setTasks((oldState) => {
-      return [...oldState, { description, id: oldState.length + 1 }];
+      return [
+        ...oldState,
+        {
+          description,
+          id: oldState.length + 1,
+        },
+      ];
     });
   };
 
@@ -32,7 +40,7 @@ export function TasksProvider(children) {
     <TaskContext.Provider
       value={{
         tasks,
-        addTasks,
+        addTask,
         toggleTaskCompleted,
         deleteTask,
       }}
