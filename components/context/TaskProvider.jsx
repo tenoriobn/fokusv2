@@ -1,19 +1,41 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useEffect, useState } from "react";
 
 export const TaskContext = createContext();
+
+const TASKS_STORAGE_KEY = "fokus-tasks";
 
 export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    console.log("precisamos carregar os dados.");
+    const getData = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem(TASKS_STORAGE_KEY);
+        const loadedData = jsonValue != null ? JSON.parse(jsonValue) : [];
+        setTasks(loadedData);
+        setIsLoaded(true);
+      } catch (e) {
+        // error reading value
+      }
+    };
+
+    getData();
   }, []);
 
   useEffect(() => {
-    if (!isLoaded) {
-      console.log("precisamos persistir");
-      setIsLoaded(true);
+    const storeData = async (value) => {
+      try {
+        const jsonValue = JSON.stringify(value);
+        await AsyncStorage.setItem(TASKS_STORAGE_KEY, jsonValue);
+      } catch (e) {
+        // saving error
+      }
+    };
+
+    if (isLoaded) {
+      storeData(tasks);
     }
   }, [tasks]);
 
