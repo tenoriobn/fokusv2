@@ -24,7 +24,7 @@ export default function Tasks() {
                 onPressEdit={() => router.navigate(`/edit-task/${item.id}`)}
               />
             )}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id.toString()}
             ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
             ListHeaderComponent={
               <Text style={styles.text}>Lista de tarefas:</Text>
