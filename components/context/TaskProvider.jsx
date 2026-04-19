@@ -70,15 +70,15 @@ export function TasksProvider({ children }) {
     });
   };
 
-  const updateTask = (id, newDescription) => {
-    setTasks((oldState) =>
-      oldState.map((t) => {
+  const updateTask = (id, description) => {
+    setTasks((oldState) => {
+      return oldState.map((t) => {
         if (t.id == id) {
-          return { ...t, description: newDescription };
+          t.description = description;
         }
         return t;
-      }),
-    );
+      });
+    });
   };
 
   return (

@@ -12,8 +12,8 @@ import {
 import { IconSave } from "../../components/Icons";
 import { useState } from "react";
 
-export default function FormTask({ onFormSubmit }) {
-  const [description, setDescription] = useState();
+export default function FormTask({ onFormSubmit, defaultValue = "" }) {
+  const [description, setDescription] = useState(defaultValue);
 
   const submitTask = () => {
     if (!description) {
@@ -31,7 +31,9 @@ export default function FormTask({ onFormSubmit }) {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
-          <Text style={styles.text}>Adicionar uma tarefa</Text>
+          <Text style={styles.text}>
+            {defaultValue ? "Editar" : "Adicionar"} uma tarefa
+          </Text>
           <Text style={styles.label}>Em que você está trabalhando?</Text>
           <TextInput
             style={styles.input}
